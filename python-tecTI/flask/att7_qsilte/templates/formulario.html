@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>{{ "Editar" if acao == "editar" else "Cadastrar" }} produto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ "Editar produto" if acao == "editar" else "Novo produto" }}</h1>
+        <a class="btn" href="{{ url_for('listar') }}">← Voltar</a>
+    </header>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+        {% for categoria, msg in mensagens %}
+            <div class="flash {{ categoria }}">{{ msg }}</div>
+        {% endfor %}
+    {% endwith %}
+
+   
+    {% if acao == "editar" %}
+        <form method="post" action="{{ url_for('editar', produto_id=produto.id) }}">
+    {% else %}
+        <form method="post" action="{{ url_for('cadastrar') }}">
+    {% endif %}
+
+        <label>Nome
+            <input type="text" name="nome" required
+                   value="{{ produto.nome if produto else '' }}">
+        </label>
+
+        <label>Categoria
+            <input type="text" name="categoria" required
+                   placeholder="Notebook, Mouse, Teclado..."
+                   value="{{ produto.categoria if produto else '' }}">
+        </label>
+
+        <label>Preço (R$)
+            <input type="number" name="preco" step="0.01" min="0" required
+                   value="{{ produto.preco if produto else '' }}">
+        </label>
+
+        <label>Estoque
+            <input type="number" name="estoque" min="0" required
+                   value="{{ produto.estoque if produto else 0 }}">
+        </label>
+
+        <button class="btn primary" type="submit">
+            {{ "Salvar alterações" if acao == "editar" else "Cadastrar" }}
+        </button>
+    </form>
+</body>
+</html>
