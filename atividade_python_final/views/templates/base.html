@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Neobrutal Board{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+</head>
+<body>
+    <header class="faixa-topo">
+        <span class="faixa-marca">Neobrutal Board</span>
+
+        <nav class="rota-menu">
+            <a href="{{ url_for('dashboard.index') }}">Painel</a>
+            <a href="{{ url_for('tarefa.index') }}">Tarefas</a>
+            <a href="{{ url_for('tarefa.nova_tarefa') }}">Cadastrar</a>
+        </nav>
+
+        <div class="rota-conta">
+            {% if session.get('usuario_id') %}
+                <span class="selo-usuario">{{ session.get('usuario_nome') }}</span>
+                <a class="chave-vazada" href="/logout">Sair</a>
+            {% else %}
+                <a class="chave-vazada" href="/login">Entrar</a>
+                <a class="chave-capsula" href="/registro">Criar conta</a>
+            {% endif %}
+            <button type="button" id="gatilho-lampada" class="chave-lampada" aria-label="Alternar aparência">☾</button>
+        </div>
+    </header>
+
+    <main class="area-central">
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+                {% for categoria, texto in mensagens %}
+                    <div class="recado recado-{{ categoria }}">{{ texto }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='style/aparencia.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

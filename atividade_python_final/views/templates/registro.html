@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Criar conta — Neobrutal Board{% endblock %}
+
+{% block content %}
+<div class="cartao-acesso">
+    <h1>Criar conta</h1>
+    <form class="ficha" method="POST" action="/registro">
+        <div class="campo-linha">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" maxlength="60" required>
+        </div>
+        <div class="campo-linha">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" maxlength="200" required>
+        </div>
+        <div class="campo-linha">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" minlength="6" required>
+        </div>
+        <button type="submit" class="chave-chanfro">Registrar</button>
+    </form>
+    <p class="nota-acesso">Já possui cadastro? <a href="/login">Entrar</a></p>
+</div>
+{% endblock %}

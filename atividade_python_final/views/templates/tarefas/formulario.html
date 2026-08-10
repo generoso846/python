@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar tarefa' if tarefa else 'Nova tarefa' }} — Neobrutal Board{% endblock %}
+
+{% block content %}
+<h1>{{ 'Editar tarefa' if tarefa else 'Nova tarefa' }}</h1>
+<p class="linha-apoio">Preencha os campos abaixo</p>
+
+<form class="ficha bloco-quadro" method="POST">
+    <div class="campo-linha">
+        <label for="titulo">Título</label>
+        <input type="text" id="titulo" name="titulo" maxlength="60" required
+               value="{{ tarefa.titulo if tarefa else '' }}">
+    </div>
+
+    <div class="campo-linha">
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" name="descricao" rows="4" maxlength="150" required>{{ tarefa.descricao if tarefa else '' }}</textarea>
+    </div>
+
+    <div class="campo-linha">
+        <label for="status">Situação</label>
+        <select id="status" name="status" required>
+            {% for opcao in ['Pendente', 'Em andamento', 'Concluida'] %}
+            <option value="{{ opcao }}" {% if tarefa and tarefa.status == opcao %}selected{% endif %}>{{ opcao }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="campo-linha">
+        <label for="usuario_id">Responsável</label>
+        <select id="usuario_id" name="usuario_id" required>
+            <option value="">Selecione...</option>
+            {% for usuario in usuarios %}
+            <option value="{{ usuario.id }}"
+                {% if tarefa and tarefa.usuario_id == usuario.id %}selected{% endif %}>
+                {{ usuario.nome }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <button type="submit" class="chave-solida">Salvar</button>
+    <a class="chave-vazada" href="{{ url_for('tarefa.index') }}">Voltar</a>
+</form>
+{% endblock %}

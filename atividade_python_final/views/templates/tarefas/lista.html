@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Tarefas — Neobrutal Board{% endblock %}
+
+{% block content %}
+<h1>Lista de Tarefas</h1>
+<p class="linha-apoio">Filtre por situação e gerencie os registros</p>
+
+<div class="trilho-filtro">
+    <label for="peneira-status">Situação</label>
+    <select id="peneira-status">
+        <option value="todas">Todas</option>
+        <option value="pendente">Pendente</option>
+        <option value="em andamento">Em andamento</option>
+        <option value="concluida">Concluída</option>
+    </select>
+    <a class="chave-capsula" href="{{ url_for('tarefa.nova_tarefa') }}">+ Nova tarefa</a>
+</div>
+
+{% if tarefas %}
+<table class="painel-registros" id="painel-tarefas">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Descrição</th>
+            <th>Situação</th>
+            <th>Responsável</th>
+            <th>Comandos</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tarefa in tarefas %}
+        <tr data-situacao="{{ tarefa.status|lower }}">
+            <td>{{ tarefa.titulo }}</td>
+            <td>{{ tarefa.descricao }}</td>
+            <td>
+                <span class="marcador marcador-{{ tarefa.status|lower|replace(' ', '-') }}">
+                    {{ tarefa.status }}
+                </span>
+            </td>
+            <td>{{ tarefa.usuario.nome if tarefa.usuario else '—' }}</td>
+            <td>
+                <div class="coluna-comandos">
+                    <a class="chave-vazada" href="/tarefa/editar/{{ tarefa.id }}">Editar</a>
+                    <a class="chave-risco" href="/tarefa/excluir/{{ tarefa.id }}">Excluir</a>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="nada-aqui" id="aviso-sem-registro" hidden>Nenhuma tarefa com essa situação.</p>
+{% else %}
+<p class="nada-aqui">Nenhuma tarefa cadastrada até o momento.</p>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='style/peneira.js') }}"></script>
+{% endblock %}

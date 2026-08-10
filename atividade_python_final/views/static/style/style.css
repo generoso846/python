@@ -1,0 +1,431 @@
+/* =========================================================
+   NEOBRUTAL BOARD — folha de estilo totalmente reescrita
+   Paleta: creme, grafite, laranja-brasa, verde-limão e roxo-uva
+   ========================================================= */
+
+:root {
+    --papel: #f7f2e7;
+    --placa: #fffdf7;
+    --tinta: #1b1a17;
+    --tinta-fraca: #6d6659;
+    --traco: #1b1a17;
+    --topo: #f2e4c9;
+    --topo-tinta: #1b1a17;
+    --brasa: #e8590c;
+    --uva: #6d28d9;
+    --limao: #a3e635;
+    --agua: #0d9488;
+    --rubi: #be123c;
+    --aguardando: #f59f00;
+    --tocando: #2563eb;
+    --finalizada: #15803d;
+    --sombra-dura: 6px 6px 0 var(--traco);
+    --sombra-baixa: 3px 3px 0 var(--traco);
+}
+
+body.modo-noturno {
+    --papel: #14161c;
+    --placa: #1d2029;
+    --tinta: #f4f1e8;
+    --tinta-fraca: #9aa1b1;
+    --traco: #000000;
+    --topo: #222634;
+    --topo-tinta: #f4f1e8;
+    --brasa: #ff8438;
+    --uva: #a78bfa;
+    --limao: #bef264;
+    --sombra-dura: 6px 6px 0 #000;
+    --sombra-baixa: 3px 3px 0 #000;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Trebuchet MS", "Verdana", sans-serif;
+    background-color: var(--papel);
+    background-image:
+        radial-gradient(var(--tinta-fraca) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--tinta);
+    transition: background-color .25s ease, color .25s ease;
+}
+
+h1 {
+    font-size: 2rem;
+    letter-spacing: -.5px;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+}
+h1::after {
+    content: "";
+    display: block;
+    width: 84px;
+    height: 8px;
+    margin-top: 8px;
+    background: var(--brasa);
+    border: 2px solid var(--traco);
+}
+h2 {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+
+/* ---------- BARRA SUPERIOR ---------- */
+.faixa-topo {
+    background: var(--topo);
+    color: var(--topo-tinta);
+    border-bottom: 4px solid var(--traco);
+    padding: 12px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+    justify-content: space-between;
+}
+.faixa-marca {
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: 3px solid var(--traco);
+    background: var(--limao);
+    color: #1b1a17;
+    padding: 4px 10px;
+    box-shadow: var(--sombra-baixa);
+}
+.rota-menu,
+.rota-conta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.rota-menu a {
+    color: var(--topo-tinta);
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: .82rem;
+    letter-spacing: 1px;
+    padding: 6px 10px;
+    border: 2px solid transparent;
+}
+.rota-menu a:hover {
+    border-color: var(--traco);
+    background: var(--placa);
+    box-shadow: var(--sombra-baixa);
+}
+.rota-conta a { color: var(--topo-tinta); font-weight: 700; font-size: .82rem; }
+.selo-usuario {
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px dashed var(--traco);
+    padding: 3px 8px;
+}
+
+/* ---------- BOTÕES (formatos variados) ---------- */
+
+/* retangular com sombra dura */
+.chave-solida {
+    display: inline-block;
+    font: inherit;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 11px 20px;
+    color: #fff;
+    background: var(--uva);
+    border: 3px solid var(--traco);
+    border-radius: 0;
+    box-shadow: var(--sombra-dura);
+    transition: transform .08s ease, box-shadow .08s ease;
+}
+.chave-solida:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0 0 0 var(--traco);
+}
+
+/* cápsula (pílula) */
+.chave-capsula {
+    display: inline-block;
+    font: inherit;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 10px 22px;
+    color: #1b1a17;
+    background: var(--limao);
+    border: 3px solid var(--traco);
+    border-radius: 999px;
+    box-shadow: var(--sombra-baixa);
+}
+.chave-capsula:hover { background: var(--brasa); color: #fff; }
+
+/* canto cortado (chanfro) */
+.chave-chanfro {
+    display: inline-block;
+    font: inherit;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 11px 22px;
+    color: #fff;
+    background: var(--brasa);
+    border: 3px solid var(--traco);
+    clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+}
+.chave-chanfro:hover { background: var(--agua); }
+
+/* contorno vazado */
+.chave-vazada {
+    display: inline-block;
+    font: inherit;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    color: var(--tinta);
+    background: transparent;
+    border: 3px double var(--traco);
+    border-radius: 4px;
+}
+.chave-vazada:hover { background: var(--tinta); color: var(--papel); }
+
+/* alerta / exclusão */
+.chave-risco {
+    display: inline-block;
+    font: inherit;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 6px 14px;
+    color: #fff;
+    background: var(--rubi);
+    border: 3px solid var(--traco);
+    border-radius: 2px 14px 2px 14px;
+}
+.chave-risco:hover { filter: brightness(1.15); }
+
+/* alternador de tema (circular) */
+.chave-lampada {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 3px solid var(--traco);
+    background: var(--placa);
+    color: var(--tinta);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--sombra-baixa);
+}
+.chave-lampada:hover { background: var(--brasa); color: #fff; }
+
+/* ---------- ESTRUTURA ---------- */
+.area-central {
+    max-width: 1040px;
+    margin: 30px auto 60px;
+    padding: 0 18px;
+}
+.linha-apoio {
+    color: var(--tinta-fraca);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: .76rem;
+    margin-top: 12px;
+}
+
+/* ---------- AVISOS ---------- */
+.recado {
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    background: var(--placa);
+    border: 3px solid var(--traco);
+    border-left-width: 12px;
+    box-shadow: var(--sombra-baixa);
+    font-weight: 700;
+}
+.recado-erro { border-left-color: var(--rubi); }
+.recado-sucesso { border-left-color: var(--finalizada); }
+
+/* ---------- PLACARES ---------- */
+.grade-placar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin: 26px 0;
+}
+.placar {
+    background: var(--placa);
+    border: 3px solid var(--traco);
+    box-shadow: var(--sombra-dura);
+    padding: 18px;
+}
+.placar-cifra {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+}
+.placar-nome {
+    display: block;
+    margin-top: 8px;
+    font-size: .74rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--tinta-fraca);
+}
+.placar-aguardando { background: color-mix(in srgb, var(--aguardando) 22%, var(--placa)); }
+.placar-tocando { background: color-mix(in srgb, var(--tocando) 18%, var(--placa)); }
+.placar-finalizada { background: color-mix(in srgb, var(--finalizada) 18%, var(--placa)); }
+
+/* ---------- BLOCOS ---------- */
+.bloco-quadro {
+    background: var(--placa);
+    border: 3px solid var(--traco);
+    box-shadow: var(--sombra-dura);
+    padding: 20px;
+    margin: 24px 0;
+}
+.citacao-hoje {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-left: 8px solid var(--uva);
+    padding-left: 14px;
+}
+
+/* ---------- FILTRO ---------- */
+.trilho-filtro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    padding: 14px;
+    background: var(--placa);
+    border: 3px dashed var(--traco);
+}
+.trilho-filtro label {
+    margin: 0;
+    font-size: .74rem;
+    letter-spacing: 2px;
+}
+.trilho-filtro select { max-width: 240px; }
+
+/* ---------- LISTAGEM ---------- */
+.painel-registros {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--placa);
+    border: 3px solid var(--traco);
+    box-shadow: var(--sombra-dura);
+}
+.painel-registros th,
+.painel-registros td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 2px solid var(--traco);
+}
+.painel-registros thead th {
+    background: var(--tinta);
+    color: var(--papel);
+    font-size: .74rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.painel-registros tbody tr:nth-child(even) { background: color-mix(in srgb, var(--tinta) 5%, transparent); }
+.painel-registros tbody tr:last-child td { border-bottom: none; }
+.coluna-comandos { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ---------- MARCADORES DE STATUS ---------- */
+.marcador {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: .72rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1b1a17;
+    border: 2px solid var(--traco);
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+.marcador-pendente { background: var(--aguardando); }
+.marcador-em-andamento { background: var(--tocando); color: #fff; }
+.marcador-concluida,
+.marcador-concluída { background: var(--finalizada); color: #fff; }
+
+/* ---------- FORMULÁRIOS ---------- */
+.ficha { max-width: 520px; }
+.campo-linha { margin-bottom: 16px; }
+label {
+    display: block;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: .74rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+}
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 11px 12px;
+    font: inherit;
+    color: var(--tinta);
+    background: var(--placa);
+    border: 3px solid var(--traco);
+    border-radius: 0;
+    outline: none;
+}
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: var(--sombra-baixa);
+    border-color: var(--brasa);
+}
+textarea { resize: vertical; }
+
+/* ---------- AUTENTICAÇÃO ---------- */
+.cartao-acesso {
+    max-width: 430px;
+    margin: 52px auto;
+    padding: 30px;
+    background: var(--placa);
+    border: 4px solid var(--traco);
+    box-shadow: 10px 10px 0 var(--uva);
+}
+.nota-acesso {
+    margin-top: 18px;
+    font-size: .82rem;
+    color: var(--tinta-fraca);
+}
+.nota-acesso a { color: var(--brasa); font-weight: 800; }
+
+/* ---------- ESTADOS VAZIOS ---------- */
+.nada-aqui {
+    padding: 18px;
+    border: 3px dotted var(--traco);
+    color: var(--tinta-fraca);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: .82rem;
+}
+
+@media (max-width: 620px) {
+    .painel-registros { display: block; overflow-x: auto; }
+    h1 { font-size: 1.5rem; }
+}

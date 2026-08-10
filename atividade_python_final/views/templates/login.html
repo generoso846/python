@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Entrar — Neobrutal Board{% endblock %}
+
+{% block content %}
+<div class="cartao-acesso">
+    <h1>Entrar</h1>
+    <form class="ficha" method="POST" action="/login">
+        <div class="campo-linha">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="campo-linha">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="chave-solida">Acessar</button>
+    </form>
+    <p class="nota-acesso">Ainda não tem conta? <a href="/registro">Criar agora</a></p>
+</div>
+{% endblock %}

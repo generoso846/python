@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Painel — Neobrutal Board{% endblock %}
+
+{% block content %}
+<h1>Painel de Controle</h1>
+<p class="linha-apoio">Flask · SQLite · API pública · Chart.js</p>
+
+<section class="grade-placar">
+    <article class="placar">
+        <span class="placar-cifra">{{ total_usuarios }}</span>
+        <span class="placar-nome">Usuários</span>
+    </article>
+    <article class="placar">
+        <span class="placar-cifra">{{ total_tarefas }}</span>
+        <span class="placar-nome">Tarefas</span>
+    </article>
+    <article class="placar placar-aguardando">
+        <span class="placar-cifra">{{ total_pendentes|default(0) }}</span>
+        <span class="placar-nome">Pendentes</span>
+    </article>
+    <article class="placar placar-tocando">
+        <span class="placar-cifra">{{ total_andamento|default(0) }}</span>
+        <span class="placar-nome">Em andamento</span>
+    </article>
+    <article class="placar placar-finalizada">
+        <span class="placar-cifra">{{ total_concluidas|default(0) }}</span>
+        <span class="placar-nome">Concluídas</span>
+    </article>
+</section>
+
+<section class="bloco-quadro">
+    <h2>Frase do dia</h2>
+    <blockquote class="citacao-hoje" id="citacao-dia" data-buscar="{{ 'nao' if frase else 'sim' }}">
+        {{ frase|default('Carregando frase motivacional...') }}
+    </blockquote>
+</section>
+
+<section class="bloco-quadro">
+    <h2>Distribuição das tarefas</h2>
+    <div style="height:300px">
+        <canvas id="tela-rosca"></canvas>
+    </div>
+    <p class="nada-aqui" id="rosca-sem-dados" hidden>Sem dados suficientes para o gráfico.</p>
+</section>
+
+<p><a class="chave-solida" href="{{ url_for('tarefa.index') }}">Abrir lista de tarefas</a></p>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="{{ url_for('static', filename='style/painel-grafico.js') }}"></script>
+{% endblock %}
